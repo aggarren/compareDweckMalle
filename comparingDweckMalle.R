@@ -4,10 +4,27 @@
 library(dplyr)
 library(tidyr)
 library(psych)
-library(ggplot2)
-library(devtools)
 library(stats)
 library(knitr)
+
+
+experimentName <- "comparingDweckMalle"
+who <- "Anna"
+if (who == "Greg")
+  workingDirectory <- "~/Documents/graphics/AnnaGarren/"
+if (who == "Anna")
+  workingDirectory <- "~/Documents/R code/"
+source(paste0(workingDirectory, "R/helper.R"))
+graphSaveDirectory <- paste0(workingDirectory, experimentName, "graphs/")
+dataDirectory <- paste0(workingDirectory, experimentName, "/data/raw/")
+processedDataDirectory <- paste0(workingDirectory, "data/processed/", experimentName, "/")
+setwd(workingDirectory)
+VerifyPathIsSafe(graphSaveDirectory)
+VerifyPathIsSafe(dataDirectory)
+VerifyPathIsSafe(processedDataDirectory)
+
+if (!exists ("purchase.df"))
+  source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
 
 # clear workspace
 rm(list = ls(all = T))
@@ -15,10 +32,10 @@ graphics.off()
 
 ## prepare datasets for PCA --------------------------------------------------
 
-d_dweck <- as.matrix(read.csv("dweckRawData.csv"))
+d_dweck <- as.matrix(d_dweck)
 d_dweck <- d_dweck[,2:ncol(d_dweck)]
 d_dweck <- matrix(as.numeric(d_dweck),ncol=ncol(d_dweck))
-d_malle <- as.matrix(t(read.csv("simulatedDataDweck.csv")))
+d_malle <- as.matrix(t(d_malle))
 d_malle <- d_malle[3:nrow(d_malle),1:ncol(d_malle)]
 d_malle <- matrix(as.numeric(d_malle),ncol=ncol(d_malle))
 
@@ -228,3 +245,4 @@ top_match_rotated <- match_rotated %>%
   arrange(desc(n)) %>%
   left_join(match_rotated) %>%
   select(comparison, n, mc)
+
