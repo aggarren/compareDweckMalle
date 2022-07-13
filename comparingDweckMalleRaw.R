@@ -38,7 +38,7 @@ d_dweck <- as.data.frame(d_dweck)
 d_malle <- as.data.frame(d_malle)
 ## function to analyze differences between two data sets
 analyze <- function(data1,data2){
-  
+  results <- matrix(data=NA,nrow=1,ncol=3)
 }
 ## function to cycle through participants for all characters ---------------
 strip <- function(matrix1,matrix2){
@@ -49,7 +49,8 @@ strip <- function(matrix1,matrix2){
     currData1 <- matrix1[index:N,]
     currData2 <- matrix2[index:N,]
     index <- index + N
-    analyze(currData1,currData2)
+    results <- analyze(currData1,currData2)
+    write.csv(results,paste0("statsComparison",character))
   }
 }
 ## perform analysis on data
