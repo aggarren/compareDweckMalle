@@ -42,39 +42,40 @@ d_malle <- mutate_all(d_malle,function(x) as.numeric(as.character(x)))
 minimum <- function(data){
   results <- c()
   for(index in 1:ncol(data)){
-    append(results,min(unlist(data[,index])))
+    results <- append(results,min(unlist(data[,index])))
   }
   return(results)
 }
 maximum <- function(data){
   results <- c()
   for(index in 1:ncol(data)){
-    append(results,max(unlist(data[,index])))
+    results <- append(results,max(unlist(data[,index])))
   }
   return(results)
 }
 meanValue <- function(data){
   results <- c()
   for(index in 1:ncol(data)){
-    append(results,mean(unlist(data[,index])))
+    results <- append(results,mean(unlist(data[,index])))
   }
   return(results)
 }
 medianValue <- function(data){
   results <- c()
   for(index in 1:ncol(data)){
-    append(results,median(unlist(data[,index])))
+    results <- append(results,median(unlist(data[,index])))
   }
   return(results)
 }
 standardDev <- function(data){
   results <- c()
   for(index in 1:ncol(data)){
-    append(results,sd(unlist(data[,index])))
+    results <- append(results,sd(unlist(data[,index])))
   }
   return(results)
 }
-analyze <- function(data1,data2){
+
+performAnalysis <- function(data1,data2,character){
   ##min
   min1 <- minimum(data1)
   min2 <- minimum(data2)
@@ -90,9 +91,8 @@ analyze <- function(data1,data2){
   ##standard deviation
   sd1 <- standardDev(data1)
   sd2 <- standardDev(data2)
-  
-  results1 <- data.frame(min = min1,max = max1,mean = mean1,median = median1,sd = sd1)
-  results2 <- data.frame(min = min2,max = max2,mean = mean2,median = median2,sd = sd2)
+  results1 <- data.frame(min1, max1,mean1,median1,sd1)
+  results2 <- data.frame(min2, max2,mean2,median2,sd2)
   results <- results1-results2
   return(results)
 }
@@ -110,9 +110,15 @@ strip <- function(matrix1,matrix2){
     currData2 <- matrix2[index2:N2,]
     index1 <- index1 + N1
     index2 <- index2 + N2
-    results <- analyze(currData1,currData2)
+    results <- performAnalysis(currData1,currData2,character)
     if(character == 1){ final <- results}
-    else { final <- rbind(final,results)}
+    else { final <- cbind(final,results)}
+  }
+  index <- 1
+  for(char in 1:length(listN1)){
+    n <- listN1[character]
+    colnames(final)[index:index+character] <- paste0(row.names(final[,index:index+character]),character)
+    index <- index + char
   }
   write.csv(final,paste0(dataDirectory,"comparison.csv"))
 }
