@@ -39,6 +39,16 @@ d_dweck <- as.data.frame(d_dweck)
 d_malle <- as.data.frame(d_malle[3:nrow(d_malle),])
 d_dweck <- mutate_all(d_dweck,function(x) as.numeric(as.character(x)))
 d_malle <- mutate_all(d_malle,function(x) as.numeric(as.character(x)))
+
+#make malle on a scale of -3 to 3
+d_malle[d_malle==0] <- -3
+d_malle[d_malle==1] <- -2
+d_malle[d_malle==2] <- -1
+d_malle[d_malle==3] <- 0
+d_malle[d_malle==4] <- 1
+d_malle[d_malle==5] <- 2
+d_malle[d_malle==6] <- 3
+
 ## functions to analyze differences between two data sets
 minimum <- function(data){
   results <- c()
