@@ -25,7 +25,7 @@ library(knitr)
 # if (!exists ("d_dweck") || !exists("d_malle"))
 #   source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
 
-d_dweck <- read.csv("dweckRawData.csv")
+d_dweck <- read.csv("reformattedDweck.csv")
 d_malle <- read.csv("simulatedDataDweck.csv")
 ## prepare datasets for analysis --------------------------------------------------
 

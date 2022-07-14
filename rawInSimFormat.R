@@ -12,7 +12,7 @@ fixLayout <- function(data){
   #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
   byCharData <- cbind(data$goal,data$recognizing,data$choices,
                       data$seeing,data$depth,data$remembering,
-                      data$communicating,data$communicating,
+                      data$communicating,
                       data$temperature,data$sounds,data$computations,
                       data$self_aware,data$depressed,data$reasoning,
                       data$self_restraint,data$emo_recog,
