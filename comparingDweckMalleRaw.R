@@ -25,12 +25,13 @@ library(knitr)
 # if (!exists ("d_dweck") || !exists("d_malle"))
 #   source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
 
-d_dweck <- read.csv("reformattedDweck.csv")
+d_dweck <- new
+#d_dweck <- read.csv("reformattedDweck.csv")
 d_malle <- read.csv("simulatedDataDweck.csv")
 ## prepare datasets for analysis --------------------------------------------------
 
 d_dweck <- as.matrix(d_dweck)
-d_dweck <- d_dweck[,2:ncol(d_dweck)]
+d_dweck <- d_dweck[,1:ncol(d_dweck)]
 d_dweck <- matrix(as.numeric(d_dweck),ncol=ncol(d_dweck))
 d_malle <- d_malle[1:nrow(d_malle),1:ncol(d_malle)]
 d_malle <- as.matrix(t(d_malle))
