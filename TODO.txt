@@ -1,0 +1,3 @@
+* Did you compare final factor loadings yours and theirs?  That is, can you show your loadings next to their Table 1 loadings?  How similar are they?  How can you show it?
+* You say "Most simulated loadings are within 0.1 of the actual loadings, so my simulated data is close enough to the raw data” —> how do you know this?  How close is close enough? 
+** To think about the above question, you may want to plot the two sets of data against each other and look at RMSE and R^2
