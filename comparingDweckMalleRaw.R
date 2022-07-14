@@ -41,36 +41,36 @@ d_malle <- mutate_all(d_malle,function(x) as.numeric(as.character(x)))
 ## functions to analyze differences between two data sets
 minimum <- function(data){
   results <- c()
-  for(index in 1:nrow(data)){
-    append(results,min(unlist(data[index,])))
+  for(index in 1:ncol(data)){
+    append(results,min(unlist(data[,index])))
   }
   return(results)
 }
 maximum <- function(data){
   results <- c()
-  for(index in 1:nrow(data)){
-    append(results,max(unlist(data[index,])))
+  for(index in 1:ncol(data)){
+    append(results,max(unlist(data[,index])))
   }
   return(results)
 }
 meanValue <- function(data){
   results <- c()
-  for(index in 1:nrow(data)){
-    append(results,mean(unlist(data[index,])))
+  for(index in 1:ncol(data)){
+    append(results,mean(unlist(data[,index])))
   }
   return(results)
 }
 medianValue <- function(data){
   results <- c()
-  for(index in 1:nrow(data)){
-    append(results,median(unlist(data[index,])))
+  for(index in 1:ncol(data)){
+    append(results,median(unlist(data[,index])))
   }
   return(results)
 }
 standardDev <- function(data){
   results <- c()
-  for(index in 1:nrow(data)){
-    append(results,sd(unlist(data[index,])))
+  for(index in 1:ncol(data)){
+    append(results,sd(unlist(data[,index])))
   }
   return(results)
 }
@@ -91,23 +91,28 @@ analyze <- function(data1,data2){
   sd1 <- standardDev(data1)
   sd2 <- standardDev(data2)
   
-  results1 <- data.frame(min1,max1,mean1,median1,sd1)
-  results2 <- data.frame(min2,max2,mean2,median2,sd2)
+  results1 <- data.frame(min = min1,max = max1,mean = mean1,median = median1,sd = sd1)
+  results2 <- data.frame(min = min2,max = max2,mean = mean2,median = median2,sd = sd2)
   results <- results1-results2
   return(results)
 }
 ## function to cycle through participants for all characters ---------------
 strip <- function(matrix1,matrix2){
-  listN <- c(17,23,22,22,20,19,20,20,21,18,20,24,20,22,21,21,20,21,19,20,21)
-  index <- 1
-  for(character in 1:length(listN)){
-    N <- listN[character]
-    currData1 <- matrix1[index:N,]
-    currData2 <- matrix2[index:N,]
-    index <- index + N
+  #listN1 and listN2 are same length
+  listN1 <- c(17,23,22,22,20,19,20,20,21,18,20,24,20,22,21,21,20,21,19,20,21)
+  listN2 <- c(17,23,22,22,20,19,20,20,21,18,20,24,20,22,21,21,20,21,19,20,21)
+  index1 <- 1
+  index2 <- 1
+  for(character in 1:length(listN1)){
+    N1 <- listN1[character]
+    N2 <- listN2[character]
+    currData1 <- matrix1[index1:N1,]
+    currData2 <- matrix2[index2:N2,]
+    index1 <- index1 + N1
+    index2 <- index2 + N2
     results <- analyze(currData1,currData2)
     if(character == 1){ final <- results}
-    else { final <- cbind(final,results)}
+    else { final <- rbind(final,results)}
   }
   write.csv(final,paste0(dataDirectory,"comparison.csv"))
 }
