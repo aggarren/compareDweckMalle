@@ -3,29 +3,30 @@
 # load libraries
 library(dplyr)
 library(tidyr)
-library(psych)
 library(stats)
 library(knitr)
 
+# 
+# experimentName <- "comparing"
+# who <- "Anna"
+# if (who == "Greg")
+#   workingDirectory <- "~/Documents/graphics/AnnaGarren/"
+# if (who == "Anna")
+#   workingDirectory <- "~/Documents/capacities/"
+# source(paste0(workingDirectory, "R/helper.R"))
+# graphSaveDirectory <- paste0(workingDirectory, experimentName, "graphs/")
+# dataDirectory <- paste0(workingDirectory, experimentName, "/data/raw/")
+# processedDataDirectory <- paste0(workingDirectory, "data/processed/", experimentName, "/")
+# setwd(workingDirectory)
+# VerifyPathIsSafe(graphSaveDirectory)
+# VerifyPathIsSafe(dataDirectory)
+# VerifyPathIsSafe(processedDataDirectory)
+# 
+# if (!exists ("d_dweck") || !exists("d_malle"))
+#   source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
 
-experimentName <- "comparing"
-who <- "Anna"
-if (who == "Greg")
-  workingDirectory <- "~/Documents/graphics/AnnaGarren/"
-if (who == "Anna")
-  workingDirectory <- "~/Documents/capacities/"
-source(paste0(workingDirectory, "R/helper.R"))
-graphSaveDirectory <- paste0(workingDirectory, experimentName, "graphs/")
-dataDirectory <- paste0(workingDirectory, experimentName, "/data/raw/")
-processedDataDirectory <- paste0(workingDirectory, "data/processed/", experimentName, "/")
-setwd(workingDirectory)
-VerifyPathIsSafe(graphSaveDirectory)
-VerifyPathIsSafe(dataDirectory)
-VerifyPathIsSafe(processedDataDirectory)
-
-if (!exists ("d_dweck") || !exists("d_malle"))
-  source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
-
+d_dweck <- read.csv("dweckRawData.csv")
+d_malle <- read.csv("simulatedDataDweck.csv")
 ## prepare datasets for analysis --------------------------------------------------
 
 d_dweck <- as.matrix(d_dweck)
@@ -114,13 +115,8 @@ strip <- function(matrix1,matrix2){
     if(character == 1){ final <- results}
     else { final <- cbind(final,results)}
   }
-  index <- 1
-  for(char in 1:length(listN1)){
-    n <- listN1[character]
-    colnames(final)[index:index+character] <- paste0(row.names(final[,index:index+character]),character)
-    index <- index + char
-  }
-  write.csv(final,paste0(dataDirectory,"comparison.csv"))
+  #write.csv(final,paste0(dataDirectory,"comparison.csv"))
+  write.csv(final,"comparison.csv")
 }
 ## perform analysis on data--------------------
 strip(d_dweck,d_malle)
