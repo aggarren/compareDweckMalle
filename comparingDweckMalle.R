@@ -8,14 +8,17 @@ library(stats)
 library(knitr)
 
 
-experimentName <- "comparingDweckMalle"
-who <- "Anna"
-if (who == "Greg")
-  workingDirectory <- "~/Documents/graphics/AnnaGarren/"
-if (who == "Anna")
+who <- "Greg" ## Anna
+if (who == "Greg") {
+    workingDirectory <- "~/Documents/graphics/AnnaGarren/"
+    experimentName <- "compareDweckMalle"  ## same as github name
+}
+if (who == "Anna") {
   workingDirectory <- "~/Documents/R code/"
+  experimentName <- "comparingDweckMalle"
+}
 source(paste0(workingDirectory, "R/helper.R"))
-graphSaveDirectory <- paste0(workingDirectory, experimentName, "graphs/")
+graphSaveDirectory <- paste0(workingDirectory, experimentName, "/graphs/")
 dataDirectory <- paste0(workingDirectory, experimentName, "/data/raw/")
 processedDataDirectory <- paste0(workingDirectory, "data/processed/", experimentName, "/")
 setwd(workingDirectory)
@@ -57,35 +60,35 @@ d_malle[d_malle==6] <- 3
 ## step 3: run pca with varimax rotation with N dimensions -------------------
 
 # run pca with n dimensions with varimax rotation
-pca_dweck_rotatedN <- principal(d_dweck, nfactors = 3, 
+pca_dweck_rotatedN <- principal(d_dweck, nfactors = 3,
                                  rotate = "varimax")
 pca_dweck_rotatedN
 
 # plot mental capacities in first two dimensions
-pca_dweck_rotatedN_loadings <- 
+pca_dweck_rotatedN_loadings <-
   data.frame(pca_dweck_rotatedN$loadings[1:40, 1:3],
              row.names = rownames(pca_dweck_rotatedN$loadings[1:40, 1:3]))
 
 # code a priori mental capacity categories
-pca_dweck_rotatedN_loadings[c("hungry", "tired", "pain", 
+pca_dweck_rotatedN_loadings[c("hungry", "tired", "pain",
                                "nauseated", "safe"),
                              "mc_cat"] <- "biological"
-pca_dweck_rotatedN_loadings[c("happy", "depressed", "fear", 
+pca_dweck_rotatedN_loadings[c("happy", "depressed", "fear",
                                "angry", "calm", "joy"),
                              "mc_cat"] <- "affective"
-pca_dweck_rotatedN_loadings[c("sounds", "seeing", "temperature", 
+pca_dweck_rotatedN_loadings[c("sounds", "seeing", "temperature",
                                "odors", "depth"),
                              "mc_cat"] <- "perceptual"
-pca_dweck_rotatedN_loadings[c("computations", "thoughts", "reasoning", 
+pca_dweck_rotatedN_loadings[c("computations", "thoughts", "reasoning",
                                "remembering", "beliefs"),
                              "mc_cat"] <- "cognitive"
-pca_dweck_rotatedN_loadings[c("free_will", "choices", "self_restraint", 
+pca_dweck_rotatedN_loadings[c("free_will", "choices", "self_restraint",
                                "intentions", "goal"),
                              "mc_cat"] <- "autonomous"
-pca_dweck_rotatedN_loadings[c("love", "recognizing", "communicating", "guilt", 
+pca_dweck_rotatedN_loadings[c("love", "recognizing", "communicating", "guilt",
                                "disrespected", "embarrassed", "emo_recog"),
                              "mc_cat"] <- "social"
-pca_dweck_rotatedN_loadings[c("conscious", "self_aware", "pleasure", 
+pca_dweck_rotatedN_loadings[c("conscious", "self_aware", "pleasure",
                                "desires", "morality", "personality", "pride"),
                              "mc_cat"] <- "other"
 
@@ -120,7 +123,7 @@ pca_dweck_rotatedN_pc3
 ## step 3: run pca with varimax rotation with N dimensions -------------------
 
 # run pca with n dimensions with varimax rotation
-pca_malle_rotatedN <- principal(d_malle, nfactors = 3, 
+pca_malle_rotatedN <- principal(d_malle, nfactors = 3,
                                 rotate = "varimax")
 pca_malle_rotatedN
 pca_malle_rotatedN_loadings <- as.data.frame.matrix(pca_malle_rotatedN$loadings)
