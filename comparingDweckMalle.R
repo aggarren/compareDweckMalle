@@ -23,7 +23,7 @@ VerifyPathIsSafe(graphSaveDirectory)
 VerifyPathIsSafe(dataDirectory)
 VerifyPathIsSafe(processedDataDirectory)
 
-if (!exists ("purchase.df"))
+if (!exists ("d_dweck") || !exists("d_malle"))
   source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
 
 # clear workspace
