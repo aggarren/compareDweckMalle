@@ -32,6 +32,8 @@ if (!exists ("d_dweck") || !exists("d_malle"))
 ## prepare datasets for PCA --------------------------------------------------
 d_dweck <- as.matrix(d_dweck)
 d_dweck <- d_dweck[,2:ncol(d_dweck)]
+d_malle <- d_malle[2:nrow(d_malle),]
+d_dweck <- d_dweck[2:nrow(d_dweck),]
 d_dweck <- matrix(as.numeric(d_dweck),ncol=ncol(d_dweck))
 d_malle <- d_malle[1:nrow(d_malle),1:ncol(d_malle)]
 d_malle <- as.matrix(t(d_malle))
@@ -40,8 +42,7 @@ d_dweck <- as.data.frame(d_dweck)
 d_malle <- as.data.frame(d_malle[2:nrow(d_malle),])
 d_dweck <- mutate_all(d_dweck,function(x) as.numeric(as.character(x)))
 d_malle <- mutate_all(d_malle,function(x) as.numeric(as.character(x)))
-d_malle <- d_malle[2:nrow(d_malle),]
-d_dweck <- d_dweck[2:nrow(d_dweck),]
+
 #make malle on a scale of -3 to 3
 d_malle[d_malle==0] <- -3
 d_malle[d_malle==1] <- -2
