@@ -8,7 +8,7 @@ library(stats)
 library(knitr)
 
 
-who <- "Anna" ## Greg
+who <- "Greg" ## Anna
 if (who == "Greg") {
     workingDirectory <- "~/Documents/graphics/AnnaGarren/"
     experimentName <- "compareDweckMalle"  ## same as github name
