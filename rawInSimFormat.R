@@ -24,7 +24,7 @@ fixLayout <- function(data){
                       data$joy,data$safe,data$happy,data$calm,data$pleasure,
                       data$fear,data$hungry,data$tired,data$pain)
   
-  return (byCharData)
+  write.csv(byCharData,"reformattedDweck.csv")
 }
-new <- fixLayout(read.csv("dweckRawData.csv"))
-write.csv(new,"reformattedDweck.csv")
+fixLayout(read.csv("dweckRawData.csv"))
+

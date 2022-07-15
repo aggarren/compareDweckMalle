@@ -6,38 +6,35 @@ library(tidyr)
 library(stats)
 library(knitr)
 
-# 
-# experimentName <- "comparing"
-# who <- "Anna"
-# if (who == "Greg")
-#   workingDirectory <- "~/Documents/graphics/AnnaGarren/"
-# if (who == "Anna")
-#   workingDirectory <- "~/Documents/capacities/"
-# source(paste0(workingDirectory, "R/helper.R"))
-# graphSaveDirectory <- paste0(workingDirectory, experimentName, "graphs/")
-# dataDirectory <- paste0(workingDirectory, experimentName, "/data/raw/")
-# processedDataDirectory <- paste0(workingDirectory, "data/processed/", experimentName, "/")
-# setwd(workingDirectory)
-# VerifyPathIsSafe(graphSaveDirectory)
-# VerifyPathIsSafe(dataDirectory)
-# VerifyPathIsSafe(processedDataDirectory)
-# 
-# if (!exists ("d_dweck") || !exists("d_malle"))
-#   source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
 
-d_dweck <- new
-#d_dweck <- read.csv("reformattedDweck.csv")
-d_malle <- read.csv("simulatedDataDweck.csv")
+experimentName <- "compareDweckMalle"
+who <- "Anna"
+if (who == "Greg")
+  workingDirectory <- "~/Documents/graphics/AnnaGarren/"
+if (who == "Anna")
+  workingDirectory <- "~/Documents/capacities/compare/"
+source(paste0(workingDirectory, "R/helper.R"))
+graphSaveDirectory <- paste0(workingDirectory, experimentName, "graphs/")
+dataDirectory <- paste0(workingDirectory, experimentName, "/data/raw/")
+processedDataDirectory <- paste0(workingDirectory, "data/processed/", experimentName, "/")
+setwd(workingDirectory)
+VerifyPathIsSafe(graphSaveDirectory)
+VerifyPathIsSafe(dataDirectory)
+VerifyPathIsSafe(processedDataDirectory)
+
+if (!exists ("d_dweck") || !exists("d_malle"))
+  source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
+
 ## prepare datasets for analysis --------------------------------------------------
 
 d_dweck <- as.matrix(d_dweck)
-d_dweck <- d_dweck[,1:ncol(d_dweck)]
+d_dweck <- d_dweck[,2:ncol(d_dweck)]
 d_dweck <- matrix(as.numeric(d_dweck),ncol=ncol(d_dweck))
 d_malle <- d_malle[1:nrow(d_malle),1:ncol(d_malle)]
 d_malle <- as.matrix(t(d_malle))
 d_malle <- matrix(as.numeric(d_malle),ncol=ncol(d_malle))
 d_dweck <- as.data.frame(d_dweck)
-d_malle <- as.data.frame(d_malle[3:nrow(d_malle),])
+d_malle <- as.data.frame(d_malle[2:nrow(d_malle),])
 d_dweck <- mutate_all(d_dweck,function(x) as.numeric(as.character(x)))
 d_malle <- mutate_all(d_malle,function(x) as.numeric(as.character(x)))
 
