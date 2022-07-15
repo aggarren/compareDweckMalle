@@ -38,6 +38,7 @@ d_malle <- as.data.frame(d_malle[2:nrow(d_malle),])
 d_dweck <- mutate_all(d_dweck,function(x) as.numeric(as.character(x)))
 d_malle <- mutate_all(d_malle,function(x) as.numeric(as.character(x)))
 d_malle <- d_malle[2:nrow(d_malle),]
+d_dweck <- d_dweck[2:nrow(d_dweck),]
 #make malle on a scale of -3 to 3
 d_malle[d_malle==0] <- -3
 d_malle[d_malle==1] <- -2
