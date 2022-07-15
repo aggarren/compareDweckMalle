@@ -4,8 +4,8 @@ fixLayout <- function(data){
                   "fish","bluejay","frog",
                   "mouse","goat","dog","bear",
                   "dolphin","elephant","chimp",
-                  "fetus","pvs","infant","child",
-                  "adult")
+                  "fetus","person in a persistant vegetative state",
+                  "infant","child","adult")
   byCharData <- c()
   byCharData <- rbind(byCharData,data[data$condition=="stapler",])
   
