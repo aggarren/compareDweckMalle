@@ -8,14 +8,14 @@ library(stats)
 library(knitr)
 
 
-who <- "Greg" ## Anna
+who <- "Anna" ## Greg
 if (who == "Greg") {
     workingDirectory <- "~/Documents/graphics/AnnaGarren/"
     experimentName <- "compareDweckMalle"  ## same as github name
 }
 if (who == "Anna") {
-  workingDirectory <- "~/Documents/R code/"
-  experimentName <- "comparingDweckMalle"
+  workingDirectory <- "~/Documents/capacities/compare/"
+  experimentName <- "compareDweckMalle"
 }
 source(paste0(workingDirectory, "R/helper.R"))
 graphSaveDirectory <- paste0(workingDirectory, experimentName, "/graphs/")
@@ -28,10 +28,6 @@ VerifyPathIsSafe(processedDataDirectory)
 
 if (!exists ("d_dweck") || !exists("d_malle"))
   source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
-
-# clear workspace
-rm(list = ls(all = T))
-graphics.off()
 
 ## prepare datasets for PCA --------------------------------------------------
 d_dweck <- as.matrix(d_dweck)
