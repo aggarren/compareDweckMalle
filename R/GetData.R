@@ -5,7 +5,7 @@ require(lubridate)  ## for today()
 ### Get Original file###
 ########################
 
-dataFileNameDweck <- paste0(dataDirectory, "dweckRawData.csv")
+dataFileNameDweck <- paste0(dataDirectory, "reformattedDweck.csv")
 d_dweck <- read.table(dataFileNameDweck)
 d_dweck <- SafeReadCSV(dataFileNameDweck)  
 
