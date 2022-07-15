@@ -7,16 +7,14 @@ library(psych)
 library(stats)
 library(knitr)
 
+myName <- Sys.info()[["user"]]
+if (!exists("myName"))
+    stop("Please enter who you are in R before running this code e.g., myName <- 'Greg'")
+if (myName == "trafton")
+  workingDirectory <- "~/Documents/graphics/AnnaGarren/"
+if (myName == "garren")
+  workingDirectory <- "~/Documents/InfoCriterion/"
 
-who <- "Greg" ## Anna
-if (who == "Greg") {
-    workingDirectory <- "~/Documents/graphics/AnnaGarren/"
-    experimentName <- "compareDweckMalle"  ## same as github name
-}
-if (who == "Anna") {
-  workingDirectory <- "~/Documents/capacities/compare/"
-  experimentName <- "compareDweckMalle"
-}
 source(paste0(workingDirectory, "R/helper.R"))
 graphSaveDirectory <- paste0(workingDirectory, experimentName, "/graphs/")
 dataDirectory <- paste0(workingDirectory, experimentName, "/data/raw/")
