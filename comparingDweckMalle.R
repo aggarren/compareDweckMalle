@@ -24,7 +24,37 @@ VerifyPathIsSafe(dataDirectory)
 VerifyPathIsSafe(processedDataDirectory)
 if (!exists ("df_dweck") || !exists("df_malle"))
   source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
-
+#make df_dweck items and characters match df_malle
+fixLayout <- function(data){
+  characters <- c("stapler","car","computer",
+                  "robot","microbe","beetle",
+                  "fish","blue jay","frog",
+                  "mouse","goat","dog","bear",
+                  "dolphin","elephant","chimpanzee",
+                  "fetus","person in a persistant vegetative state",
+                  "infant","child","adult")
+  byCharData <- c()
+  for(index in 1:length(characters)){
+    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
+  }
+  #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
+  byCharData <- cbind(byCharData$goal,byCharData$recognizing,byCharData$choices,
+                      byCharData$seeing,byCharData$depth,byCharData$remembering,
+                      byCharData$communicating,
+                      byCharData$temperature,byCharData$sounds,byCharData$computations,
+                      byCharData$self_aware,byCharData$depressed,byCharData$reasoning,
+                      byCharData$self_restraint,byCharData$emo_recog,
+                      byCharData$pride, byCharData$disrespected, byCharData$morality,
+                      byCharData$embarrassed, byCharData$guilt, byCharData$beliefs,
+                      byCharData$intentions,byCharData$odors,byCharData$free_will,
+                      byCharData$thoughts,byCharData$personality,byCharData$conscious,
+                      byCharData$love,byCharData$angry,byCharData$desires,byCharData$nauseated,
+                      byCharData$joy,byCharData$safe,byCharData$happy,byCharData$calm,byCharData$pleasure,
+                      byCharData$fear,byCharData$hungry,byCharData$tired,byCharData$pain)
+  
+  df_dweck <- byCharData
+}
+fixLayout(df_dweck)
 ## prepare datasets for analysis --------------------------------------------------
 d_dweck <- df_dweck
 d_malle <- df_malle

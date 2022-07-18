@@ -5,11 +5,10 @@ library(tidyr)
 library(stats)
 library(knitr)
 
-
 experimentName <- "compareDweckMalle"
 myName <- Sys.info()[["user"]]
 if (!exists("myName"))
-    stop("Please enter who you are in R before running this code e.g., myName <- 'Greg'")
+  stop("Please enter who you are in R before running this code e.g., myName <- 'Greg'")
 if (myName == "trafton")
   workingDirectory <- "~/Documents/graphics/AnnaGarren/"
 if (myName == "garren")
@@ -23,8 +22,38 @@ VerifyPathIsSafe(graphSaveDirectory)
 VerifyPathIsSafe(dataDirectory)
 VerifyPathIsSafe(processedDataDirectory)
 if (!exists ("df_dweck") || !exists("df_malle"))
-source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
-
+  source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
+#make df_dweck items and characters match df_malle
+fixLayout <- function(data){
+  characters <- c("stapler","car","computer",
+                  "robot","microbe","beetle",
+                  "fish","blue jay","frog",
+                  "mouse","goat","dog","bear",
+                  "dolphin","elephant","chimpanzee",
+                  "fetus","person in a persistant vegetative state",
+                  "infant","child","adult")
+  byCharData <- c()
+  for(index in 1:length(characters)){
+    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
+  }
+  #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
+  byCharData <- cbind(byCharData$goal,byCharData$recognizing,byCharData$choices,
+                      byCharData$seeing,byCharData$depth,byCharData$remembering,
+                      byCharData$communicating,
+                      byCharData$temperature,byCharData$sounds,byCharData$computations,
+                      byCharData$self_aware,byCharData$depressed,byCharData$reasoning,
+                      byCharData$self_restraint,byCharData$emo_recog,
+                      byCharData$pride, byCharData$disrespected, byCharData$morality,
+                      byCharData$embarrassed, byCharData$guilt, byCharData$beliefs,
+                      byCharData$intentions,byCharData$odors,byCharData$free_will,
+                      byCharData$thoughts,byCharData$personality,byCharData$conscious,
+                      byCharData$love,byCharData$angry,byCharData$desires,byCharData$nauseated,
+                      byCharData$joy,byCharData$safe,byCharData$happy,byCharData$calm,byCharData$pleasure,
+                      byCharData$fear,byCharData$hungry,byCharData$tired,byCharData$pain)
+  
+  df_dweck <- byCharData
+}
+fixLayout(df_dweck)
 ## prepare datasets for analysis --------------------------------------------------
 d_dweck <- df_dweck
 d_malle <- df_malle
@@ -48,6 +77,7 @@ d_malle[d_malle==3] <- 0
 d_malle[d_malle==4] <- 1
 d_malle[d_malle==5] <- 2
 d_malle[d_malle==6] <- 3
+
 
 ## functions to analyze differences between two data sets
 minimum <- function(data){
