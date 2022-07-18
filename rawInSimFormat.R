@@ -7,8 +7,9 @@ fixLayout <- function(data){
                   "fetus","person in a persistant vegetative state",
                   "infant","child","adult")
   byCharData <- c()
-  byCharData <- rbind(byCharData,data[data$condition=="stapler",])
-  
+  for(index in 1:length(characters)){
+    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
+  }
   #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
   byCharData <- cbind(data$goal,data$recognizing,data$choices,
                       data$seeing,data$depth,data$remembering,
