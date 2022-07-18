@@ -7,22 +7,23 @@ fixLayout <- function(data){
                   "fetus","person in a persistant vegetative state",
                   "infant","child","adult")
   byCharData <- c()
-  byCharData <- rbind(byCharData,data[data$condition=="stapler",])
-  
+  for(index in 1:length(characters)){
+    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
+  }
   #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
-  byCharData <- cbind(data$goal,data$recognizing,data$choices,
-                      data$seeing,data$depth,data$remembering,
-                      data$communicating,
-                      data$temperature,data$sounds,data$computations,
-                      data$self_aware,data$depressed,data$reasoning,
-                      data$self_restraint,data$emo_recog,
-                      data$pride, data$disrespected, data$morality,
-                      data$embarrassed, data$guilt, data$beliefs,
-                      data$intentions,data$odors,data$free_will,
-                      data$thoughts,data$personality,data$conscious,
-                      data$love,data$angry,data$desires,data$nauseated,
-                      data$joy,data$safe,data$happy,data$calm,data$pleasure,
-                      data$fear,data$hungry,data$tired,data$pain)
+  byCharData <- cbind(byCharData$goal,byCharData$recognizing,byCharData$choices,
+                      byCharData$seeing,byCharData$depth,byCharData$remembering,
+                      byCharData$communicating,
+                      byCharData$temperature,byCharData$sounds,byCharData$computations,
+                      byCharData$self_aware,byCharData$depressed,byCharData$reasoning,
+                      byCharData$self_restraint,byCharData$emo_recog,
+                      byCharData$pride, byCharData$disrespected, byCharData$morality,
+                      byCharData$embarrassed, byCharData$guilt, byCharData$beliefs,
+                      byCharData$intentions,byCharData$odors,byCharData$free_will,
+                      byCharData$thoughts,byCharData$personality,byCharData$conscious,
+                      byCharData$love,byCharData$angry,byCharData$desires,byCharData$nauseated,
+                      byCharData$joy,byCharData$safe,byCharData$happy,byCharData$calm,byCharData$pleasure,
+                      byCharData$fear,byCharData$hungry,byCharData$tired,byCharData$pain)
   
   write.csv(byCharData,"reformattedDweck.csv")
 }
