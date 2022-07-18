@@ -1,4 +1,6 @@
-# set up workspace -------------------------------------------------------------
+# clear workspace
+rm(list = ls(all = T))
+graphics.off()
 
 # load libraries
 library(dplyr)
@@ -12,9 +14,9 @@ myName <- Sys.info()[["user"]]
 if (!exists("myName"))
     stop("Please enter who you are in R before running this code e.g., myName <- 'Greg'")
 if (myName == "trafton")
-  workingDirectory <- "~/Documents/capacities/compare/"
+  workingDirectory <- "~/Documents/graphics/AnnaGarren/"
 if (myName == "garren")
-  workingDirectory <- "~/Documents/InfoCriterion/"
+  workingDirectory <- "~/Documents/capacities/compare/"
 source(paste0(workingDirectory, "R/helper.R"))
 graphSaveDirectory <- paste0(workingDirectory, experimentName, "graphs/")
 dataDirectory <- paste0(workingDirectory, experimentName, "/data/raw/")
@@ -24,8 +26,7 @@ VerifyPathIsSafe(graphSaveDirectory)
 VerifyPathIsSafe(dataDirectory)
 VerifyPathIsSafe(processedDataDirectory)
 
-if (!exists ("d_dweck") || !exists("d_malle"))
-  source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
+source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
 
 ## prepare datasets for analysis --------------------------------------------------
 
@@ -123,11 +124,12 @@ strip <- function(matrix1,matrix2){
     index1 <- index1 + N1
     index2 <- index2 + N2
     results <- performAnalysis(currData1,currData2,character)
-    if(character == 1){ final <- results}
+    if(character == 1){ 
+      final <- results
+    }
     else { final <- cbind(final,results)}
   }
-  #write.csv(final,paste0(dataDirectory,"comparison.csv"))
-  write.csv(final,"comparison.csv")
+  write.csv(final,paste0(dataDirectory,"comparison.csv"))
 }
 ## perform analysis on data--------------------
 strip(d_dweck,d_malle)
