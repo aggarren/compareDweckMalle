@@ -6,32 +6,30 @@ library(tidyr)
 library(psych)
 library(stats)
 library(knitr)
-
+experimentName <- "compareDweckMalle"
 myName <- Sys.info()[["user"]]
 if (!exists("myName"))
-    stop("Please enter who you are in R before running this code e.g., myName <- 'Greg'")
+  stop("Please enter who you are in R before running this code e.g., myName <- 'Greg'")
 if (myName == "trafton")
   workingDirectory <- "~/Documents/graphics/AnnaGarren/"
 if (myName == "garren")
-  workingDirectory <- "~/Documents/InfoCriterion/"
-
+  workingDirectory <- "~/Documents/capacities/compare/"
 source(paste0(workingDirectory, "R/helper.R"))
-graphSaveDirectory <- paste0(workingDirectory, experimentName, "/graphs/")
+graphSaveDirectory <- paste0(workingDirectory, experimentName, "graphs/")
 dataDirectory <- paste0(workingDirectory, experimentName, "/data/raw/")
 processedDataDirectory <- paste0(workingDirectory, "data/processed/", experimentName, "/")
 setwd(workingDirectory)
 VerifyPathIsSafe(graphSaveDirectory)
 VerifyPathIsSafe(dataDirectory)
 VerifyPathIsSafe(processedDataDirectory)
-
-if (!exists ("d_dweck") || !exists("d_malle"))
+if (!exists ("df_dweck") || !exists("df_malle"))
   source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
 
-## prepare datasets for PCA --------------------------------------------------
+## prepare datasets for analysis --------------------------------------------------
+d_dweck <- df_dweck
+d_malle <- df_malle
 d_dweck <- as.matrix(d_dweck)
 d_dweck <- d_dweck[,2:ncol(d_dweck)]
-d_malle <- d_malle[2:nrow(d_malle),]
-d_dweck <- d_dweck[2:nrow(d_dweck),]
 d_dweck <- matrix(as.numeric(d_dweck),ncol=ncol(d_dweck))
 d_malle <- d_malle[1:nrow(d_malle),1:ncol(d_malle)]
 d_malle <- as.matrix(t(d_malle))
@@ -40,7 +38,8 @@ d_dweck <- as.data.frame(d_dweck)
 d_malle <- as.data.frame(d_malle[2:nrow(d_malle),])
 d_dweck <- mutate_all(d_dweck,function(x) as.numeric(as.character(x)))
 d_malle <- mutate_all(d_malle,function(x) as.numeric(as.character(x)))
-
+d_malle <- d_malle[2:nrow(d_malle),]
+d_dweck <- d_dweck[2:nrow(d_dweck),]
 #make malle on a scale of -3 to 3
 d_malle[d_malle==0] <- -3
 d_malle[d_malle==1] <- -2
@@ -49,6 +48,7 @@ d_malle[d_malle==3] <- 0
 d_malle[d_malle==4] <- 1
 d_malle[d_malle==5] <- 2
 d_malle[d_malle==6] <- 3
+
 
 # PCA: dweck condition --------------------------------------------------------
 
