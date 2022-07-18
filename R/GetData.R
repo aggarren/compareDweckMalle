@@ -6,7 +6,7 @@ require(lubridate)  ## for today()
 ########################
 
 dataFileNameDweck <- paste0(dataDirectory, "reformattedDweck.csv")
-d_dweck <- SafeReadCSV(dataFileNameDweck)  
+df_dweck <- SafeReadCSV(dataFileNameDweck)  
 
 dataFileNameMalle <- paste0(dataDirectory, "simulatedDataDweck.csv")
-d_malle <- SafeReadCSV(dataFileNameMalle)  
+df_malle <- SafeReadCSV(dataFileNameMalle)  

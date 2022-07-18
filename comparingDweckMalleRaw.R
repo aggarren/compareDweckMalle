@@ -25,11 +25,12 @@ setwd(workingDirectory)
 VerifyPathIsSafe(graphSaveDirectory)
 VerifyPathIsSafe(dataDirectory)
 VerifyPathIsSafe(processedDataDirectory)
-
+if (!exists ("df_dweck") || !exists("df_malle"))
 source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
 
 ## prepare datasets for analysis --------------------------------------------------
-
+d_dweck <- df_dweck
+d_malle <- df_malle
 d_dweck <- as.matrix(d_dweck)
 d_dweck <- d_dweck[,2:ncol(d_dweck)]
 d_dweck <- matrix(as.numeric(d_dweck),ncol=ncol(d_dweck))
