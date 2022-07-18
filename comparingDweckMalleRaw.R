@@ -12,7 +12,7 @@ myName <- Sys.info()[["user"]]
 if (!exists("myName"))
     stop("Please enter who you are in R before running this code e.g., myName <- 'Greg'")
 if (myName == "trafton")
-  workingDirectory <- "~/Documents/graphics/AnnaGarren/"
+  workingDirectory <- "~/Documents/capacities/compare/"
 if (myName == "garren")
   workingDirectory <- "~/Documents/InfoCriterion/"
 source(paste0(workingDirectory, "R/helper.R"))
