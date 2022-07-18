@@ -1,6 +1,3 @@
-# clear workspace
-rm(list = ls(all = T))
-graphics.off()
 
 # load libraries
 library(dplyr)
