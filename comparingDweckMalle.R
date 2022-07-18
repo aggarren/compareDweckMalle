@@ -286,4 +286,4 @@ top_match_rotated <- match_rotated %>%
   arrange(desc(n)) %>%
   left_join(match_rotated) %>%
   select(comparison, n, mc)
-
+write.csv(top_match_rotated,paste0(dataDirectory,"top_match_rotated.csv"))
