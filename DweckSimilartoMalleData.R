@@ -98,10 +98,11 @@ items40chars21 <- function(data){
                   "infant","child","adult")
   byCharData <- c()
   for(index in 1:length(characters)){
-    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
+    byCharData <- rbind(byCharData,data[data$condition == characters[index],])
   }
+  print(byCharData)
   #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
-  byCharData <- cbind(byCharData$goal,byCharData$recognizing,byCharData$choices,
+  final <- cbind(byCharData$goal,byCharData$recognizing,byCharData$choices,
                       byCharData$seeing,byCharData$depth,byCharData$remembering,
                       byCharData$communicating,
                       byCharData$temperature,byCharData$sounds,byCharData$computations,
@@ -115,7 +116,7 @@ items40chars21 <- function(data){
                       byCharData$joy,byCharData$safe,byCharData$happy,byCharData$calm,byCharData$pleasure,
                       byCharData$fear,byCharData$hungry,byCharData$tired,byCharData$pain)
   
-  write.csv(byCharData,paste0(dataDirectory,"items40chars21.csv"))
+  write.csv(final,paste0(dataDirectory,"items40chars21.csv"))
 }
 items16chars3(d_dweck)
 items16chars21(d_dweck)

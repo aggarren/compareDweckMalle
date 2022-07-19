@@ -1,11 +1,8 @@
-# set up workspace -------------------------------------------------------------
-
-# load libraries
 library(dplyr)
 library(tidyr)
-library(psych)
 library(stats)
 library(knitr)
+
 experimentName <- "compareDweckMalle"
 myName <- Sys.info()[["user"]]
 if (!exists("myName"))
@@ -24,52 +21,51 @@ VerifyPathIsSafe(dataDirectory)
 VerifyPathIsSafe(processedDataDirectory)
 if (!exists ("df_dweck") || !exists("df_malle"))
   source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
+
 #make df_dweck items and characters match df_malle
-fixLayout <- function(data){
-  characters <- c("stapler","car","computer",
-                  "robot","microbe","beetle",
-                  "fish","blue jay","frog",
-                  "mouse","goat","dog","bear",
-                  "dolphin","elephant","chimpanzee",
-                  "fetus","person in a persistant vegetative state",
-                  "infant","child","adult")
-  byCharData <- c()
-  for(index in 1:length(characters)){
+data <- df_dweck
+characters <- c("stapler","car","computer",
+                "robot","microbe","beetle",
+                "fish","blue jay","frog",
+                "mouse","goat","dog","bear",
+                "dolphin","elephant","chimpanzee",
+                "fetus","person in a persistant vegetative state",
+                "infant","child","adult")
+for(index in 1:length(characters)){
+  if(index == 1){ byCharData <- as.data.frame(data[data$condition==characters[index],])}
+  else {
     byCharData <- rbind(byCharData,data[data$condition==characters[index],])
   }
-  #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
-  byCharData <- cbind(byCharData$goal,byCharData$recognizing,byCharData$choices,
-                      byCharData$seeing,byCharData$depth,byCharData$remembering,
-                      byCharData$communicating,
-                      byCharData$temperature,byCharData$sounds,byCharData$computations,
-                      byCharData$self_aware,byCharData$depressed,byCharData$reasoning,
-                      byCharData$self_restraint,byCharData$emo_recog,
-                      byCharData$pride, byCharData$disrespected, byCharData$morality,
-                      byCharData$embarrassed, byCharData$guilt, byCharData$beliefs,
-                      byCharData$intentions,byCharData$odors,byCharData$free_will,
-                      byCharData$thoughts,byCharData$personality,byCharData$conscious,
-                      byCharData$love,byCharData$angry,byCharData$desires,byCharData$nauseated,
-                      byCharData$joy,byCharData$safe,byCharData$happy,byCharData$calm,byCharData$pleasure,
-                      byCharData$fear,byCharData$hungry,byCharData$tired,byCharData$pain)
-  
-  df_dweck <- byCharData
 }
-fixLayout(df_dweck)
+#NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
+byCharData <- cbind(byCharData$goal,byCharData$recognizing,byCharData$choices,
+                    byCharData$seeing,byCharData$depth,byCharData$remembering,
+                    byCharData$communicating,
+                    byCharData$temperature,byCharData$sounds,byCharData$computations,
+                    byCharData$self_aware,byCharData$depressed,byCharData$reasoning,
+                    byCharData$self_restraint,byCharData$emo_recog,
+                    byCharData$pride, byCharData$disrespected, byCharData$morality,
+                    byCharData$embarrassed, byCharData$guilt, byCharData$beliefs,
+                    byCharData$intentions,byCharData$odors,byCharData$free_will,
+                    byCharData$thoughts,byCharData$personality,byCharData$conscious,
+                    byCharData$love,byCharData$angry,byCharData$desires,byCharData$nauseated,
+                    byCharData$joy,byCharData$safe,byCharData$happy,byCharData$calm,byCharData$pleasure,
+                    byCharData$fear,byCharData$hungry,byCharData$tired,byCharData$pain)
+
+df_dweck <- byCharData
 ## prepare datasets for analysis --------------------------------------------------
-d_dweck <- df_dweck
-d_malle <- df_malle
+d_dweck <- df_dweck[2:nrow(df_dweck),]
+d_malle <- df_malle[,3:ncol(df_malle)]
 d_dweck <- as.matrix(d_dweck)
-d_dweck <- d_dweck[,2:ncol(d_dweck)]
+d_dweck <- d_dweck[,1:ncol(d_dweck)]
 d_dweck <- matrix(as.numeric(d_dweck),ncol=ncol(d_dweck))
 d_malle <- d_malle[1:nrow(d_malle),1:ncol(d_malle)]
 d_malle <- as.matrix(t(d_malle))
 d_malle <- matrix(as.numeric(d_malle),ncol=ncol(d_malle))
 d_dweck <- as.data.frame(d_dweck)
-d_malle <- as.data.frame(d_malle[2:nrow(d_malle),])
+d_malle <- as.data.frame(d_malle)
 d_dweck <- mutate_all(d_dweck,function(x) as.numeric(as.character(x)))
 d_malle <- mutate_all(d_malle,function(x) as.numeric(as.character(x)))
-d_malle <- d_malle[2:nrow(d_malle),]
-d_dweck <- d_dweck[2:nrow(d_dweck),]
 #make malle on a scale of -3 to 3
 d_malle[d_malle==0] <- -3
 d_malle[d_malle==1] <- -2
@@ -78,8 +74,6 @@ d_malle[d_malle==3] <- 0
 d_malle[d_malle==4] <- 1
 d_malle[d_malle==5] <- 2
 d_malle[d_malle==6] <- 3
-
-
 # PCA: dweck condition --------------------------------------------------------
 
 ## step 3: run pca with varimax rotation with N dimensions -------------------
