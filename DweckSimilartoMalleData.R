@@ -27,11 +27,9 @@ if (!exists ("df_dweck") || !exists("df_malle"))
 #make df_dweck items and characters match df_malle
 items16chars3 <- function(data){
   characters <- c("robot","child","adult")
+  byCharData <- c()
   for(index in 1:length(characters)){
-    if(index == 1){ byCharData <- as.data.frame(data[data$condition==characters[index],])}
-    else {
-      byCharData <- rbind(byCharData,data[data$condition==characters[index],])
-    }
+    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
   }
   #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
   byCharData <- cbind(byCharData$choices,byCharData$communicating,
@@ -41,15 +39,8 @@ items16chars3 <- function(data){
                       byCharData$intentions,byCharData$thoughts,
                       byCharData$love,byCharData$angry,byCharData$desires,
                       byCharData$joy,byCharData$hungry,byCharData$pain)
-
-  data <- byCharData
-  ## prepare datasets for analysis --------------------------------------------------
-  data <- data[2:nrow(data),]
-  data <- data[,1:ncol(data)]
-  data <- matrix(as.numeric(data),ncol=ncol(data))
-  data <- as.data.frame(data)
-  data <- mutate_all(data,function(x) as.numeric(as.character(x)))
-  write.csv(data,paste0(dataDirectory,"items16chars3.csv"))
+  
+  write.csv(byCharData,paste0(dataDirectory,"items16chars3.csv"))
 }
 items16chars21 <- function(data){
   characters <- c("stapler","car","computer",
@@ -59,11 +50,9 @@ items16chars21 <- function(data){
                   "dolphin","elephant","chimpanzee",
                   "fetus","person in a persistant vegetative state",
                   "infant","child","adult")
+  byCharData <- c()
   for(index in 1:length(characters)){
-    if(index == 1){ byCharData <- as.data.frame(data[data$condition==characters[index],])}
-    else {
-      byCharData <- rbind(byCharData,data[data$condition==characters[index],])
-    }
+    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
   }
   #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
   byCharData <- cbind(byCharData$choices,byCharData$communicating,
@@ -74,30 +63,13 @@ items16chars21 <- function(data){
                       byCharData$love,byCharData$angry,byCharData$desires,
                       byCharData$joy,byCharData$hungry,byCharData$pain)
   
-  data <- byCharData
-  ## prepare datasets for analysis --------------------------------------------------
-  data <- data[2:nrow(data),]
-  data <- as.matrix(data)
-  data <- data[,1:ncol(data)]
-  data <- matrix(as.numeric(data),ncol=ncol(data))
-  data <- as.data.frame(data)
-  data <- mutate_all(data,function(x) as.numeric(as.character(x)))
-  
-  write.csv(data,paste0(dataDirectory,"items16chars21.csv"))
+  write.csv(byCharData,paste0(dataDirectory,"items16chars21.csv"))
 }
 items40chars3 <- function(data){
-  characters <- c("stapler","car","computer",
-                  "robot","microbe","beetle",
-                  "fish","blue jay","frog",
-                  "mouse","goat","dog","bear",
-                  "dolphin","elephant","chimpanzee",
-                  "fetus","person in a persistant vegetative state",
-                  "infant","child","adult")
+  characters <- c("robot","child","adult")
+  byCharData <- c()
   for(index in 1:length(characters)){
-    if(index == 1){ byCharData <- as.data.frame(data[data$condition==characters[index],])}
-    else {
-      byCharData <- rbind(byCharData,data[data$condition==characters[index],])
-    }
+    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
   }
   #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
   byCharData <- cbind(byCharData$goal,byCharData$recognizing,byCharData$choices,
@@ -114,15 +86,7 @@ items40chars3 <- function(data){
                       byCharData$joy,byCharData$safe,byCharData$happy,byCharData$calm,byCharData$pleasure,
                       byCharData$fear,byCharData$hungry,byCharData$tired,byCharData$pain)
   
-  data <- byCharData
-  ## prepare datasets for analysis --------------------------------------------------
-  data <- data[2:nrow(data),]
-  data <- as.matrix(data)
-  data <- data[,1:ncol(data)]
-  data <- matrix(as.numeric(data),ncol=ncol(data))
-  data <- as.data.frame(data)
-  data <- mutate_all(data,function(x) as.numeric(as.character(x)))
-  write.csv(data,paste0(dataDirectory,"items40chars3.csv"))
+  write.csv(byCharData,paste0(dataDirectory,"items40chars3.csv"))
 }
 items40chars21 <- function(data){
   characters <- c("stapler","car","computer",
@@ -132,11 +96,9 @@ items40chars21 <- function(data){
                   "dolphin","elephant","chimpanzee",
                   "fetus","person in a persistant vegetative state",
                   "infant","child","adult")
+  byCharData <- c()
   for(index in 1:length(characters)){
-    if(index == 1){ byCharData <- as.data.frame(data[data$condition==characters[index],])}
-    else {
-      byCharData <- rbind(byCharData,data[data$condition==characters[index],])
-    }
+    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
   }
   #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
   byCharData <- cbind(byCharData$goal,byCharData$recognizing,byCharData$choices,
@@ -153,18 +115,9 @@ items40chars21 <- function(data){
                       byCharData$joy,byCharData$safe,byCharData$happy,byCharData$calm,byCharData$pleasure,
                       byCharData$fear,byCharData$hungry,byCharData$tired,byCharData$pain)
   
-  data <- byCharData
-  ## prepare datasets for analysis --------------------------------------------------
-  data <- data[2:nrow(data),]
-  data <- as.matrix(data)
-  data <- data[,1:ncol(data)]
-  data <- matrix(as.numeric(data),ncol=ncol(data))
-  data <- as.data.frame(data)
-  data <- mutate_all(data,function(x) as.numeric(as.character(x)))
-  write.csv(data,paste0(dataDirectory,"items40chars21.csv"))
+  write.csv(byCharData,paste0(dataDirectory,"items40chars21.csv"))
 }
-df_dweck <- as.data.frame(df_dweck)
-items16chars3(df_dweck)
-items16chars21(df_dweck)
-items40chars3(df_dweck)
-items40chars21(df_dweck)
+items16chars3(d_dweck)
+items16chars21(d_dweck)
+items40chars3(d_dweck)
+items40chars21(d_dweck)
