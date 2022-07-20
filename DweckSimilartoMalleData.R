@@ -32,13 +32,11 @@ items16chars3 <- function(data){
     byCharData <- rbind(byCharData,data[data$condition==characters[index],])
   }
   #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
-  byCharData <- cbind(byCharData$choices,byCharData$communicating,
-                      byCharData$temperature,byCharData$sounds,
-                      byCharData$self_restraint,byCharData$emo_recog,
-                      byCharData$morality,byCharData$beliefs,
-                      byCharData$intentions,byCharData$thoughts,
-                      byCharData$love,byCharData$angry,byCharData$desires,
-                      byCharData$joy,byCharData$hungry,byCharData$pain)
+  byCharData <- cbind(byCharData$hungry,byCharData$pain,byCharData$pleasure,byCharData$joy,
+                      byCharData$angry,byCharData$love,byCharData$desires,byCharData$beliefs,
+                      byCharData$intentions,byCharData$reasoning,byCharData$emo_recog,
+                      byCharData$choices,byCharData$self_restraint,byCharData$communicating,
+                      byCharData$sounds,byCharData$temperature)
   
   write.csv(byCharData,paste0(dataDirectory,"items16chars3.csv"))
 }
@@ -55,13 +53,11 @@ items16chars21 <- function(data){
     byCharData <- rbind(byCharData,data[data$condition==characters[index],])
   }
   #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
-  byCharData <- cbind(byCharData$choices,byCharData$communicating,
-                      byCharData$temperature,byCharData$sounds,
-                      byCharData$self_restraint,byCharData$emo_recog,
-                      byCharData$morality,byCharData$beliefs,
-                      byCharData$intentions,byCharData$thoughts,
-                      byCharData$love,byCharData$angry,byCharData$desires,
-                      byCharData$joy,byCharData$hungry,byCharData$pain)
+  byCharData <- cbind(byCharData$hungry,byCharData$pain,byCharData$pleasure,byCharData$joy,
+                      byCharData$angry,byCharData$love,byCharData$desires,byCharData$beliefs,
+                      byCharData$intentions,byCharData$reasoning,byCharData$emo_recog,
+                      byCharData$choices,byCharData$self_restraint,byCharData$communicating,
+                      byCharData$sounds,byCharData$temperature)
   
   write.csv(byCharData,paste0(dataDirectory,"items16chars21.csv"))
 }
@@ -115,8 +111,9 @@ items40chars21 <- function(data){
                       byCharData$joy,byCharData$safe,byCharData$happy,byCharData$calm,byCharData$pleasure,
                       byCharData$fear,byCharData$hungry,byCharData$tired,byCharData$pain)
   
-  write.csv(byCharData,paste0(dataDirectory,"items40chars21.csv"))
+   write.csv(byCharData,paste0(dataDirectory,"items40chars21.csv"))
 }
+d_dweck <- df_dweck
 items16chars3(d_dweck)
 items16chars21(d_dweck)
 items40chars3(d_dweck)
