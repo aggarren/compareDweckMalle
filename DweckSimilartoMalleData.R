@@ -5,7 +5,7 @@ library(tidyr)
 library(psych)
 library(stats)
 library(knitr)
-experimentName <- "compareSimilarities"
+experimentName <- "compareDweckMalle"
 myName <- Sys.info()[["user"]]
 if (!exists("myName"))
   stop("Please enter who you are in R before running this code e.g., myName <- 'Greg'")
@@ -13,7 +13,7 @@ if (myName == "trafton")
   workingDirectory <- "~/Documents/graphics/AnnaGarren/"
 if (myName == "garren")
   workingDirectory <- "~/Documents/capacities/compare/"
-source(paste0(workingDirectory, "R/helper.R"))
+source(paste0(workingDirectory, experimentName,"/R/helper.R"))
 graphSaveDirectory <- paste0(workingDirectory, experimentName, "graphs/")
 dataDirectory <- paste0(workingDirectory, experimentName, "/data/raw/")
 processedDataDirectory <- paste0(workingDirectory, "data/processed/", experimentName, "/")
@@ -21,7 +21,7 @@ setwd(workingDirectory)
 VerifyPathIsSafe(graphSaveDirectory)
 VerifyPathIsSafe(dataDirectory)
 VerifyPathIsSafe(processedDataDirectory)
-if (!exists ("df_dweck") || !exists("df_malle"))
+if (!exists ("df_dweck"))
   source(paste0(workingDirectory, experimentName, "/R/", "GetData.R"))
 
 #make df_dweck items and characters match df_malle
@@ -113,7 +113,7 @@ items40chars21 <- function(data){
   
    write.csv(byCharData,paste0(dataDirectory,"items40chars21.csv"))
 }
-d_dweck <- df_dweck
+d_dweck <- as.data.frame(df_dweck)
 items16chars3(d_dweck)
 items16chars21(d_dweck)
 items40chars3(d_dweck)

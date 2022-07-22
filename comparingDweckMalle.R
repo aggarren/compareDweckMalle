@@ -2,6 +2,7 @@ library(dplyr)
 library(tidyr)
 library(stats)
 library(knitr)
+library(psych)
 
 experimentName <- "compareDweckMalle"
 myName <- Sys.info()[["user"]]
@@ -11,7 +12,7 @@ if (myName == "trafton")
   workingDirectory <- "~/Documents/graphics/AnnaGarren/"
 if (myName == "garren")
   workingDirectory <- "~/Documents/capacities/compare/"
-source(paste0(workingDirectory, "R/helper.R"))
+source(paste0(workingDirectory, experimentName, "/R/helper.R"))
 graphSaveDirectory <- paste0(workingDirectory, experimentName, "graphs/")
 dataDirectory <- paste0(workingDirectory, experimentName, "/data/raw/")
 processedDataDirectory <- paste0(workingDirectory, "data/processed/", experimentName, "/")
