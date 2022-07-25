@@ -47,3 +47,9 @@ RC2 =~ V14 + V15 + V16
 RC3 =~ V10 + V12 + V13'
 cfa_16_3 <- cfa(m_16_3,data=df_16_3,std.lv=TRUE)
 all_16_3 <- summary(cfa_16_3,fit.measures=TRUE,standardized=TRUE)
+
+all_16_3$fit['cfi']
+all_16_21$fit['cfi']
+all_40_21$fit['cfi']
+all_40_3$fit['cfi']
+
