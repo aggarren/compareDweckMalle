@@ -8,6 +8,7 @@ Contents:
 	comparingDweckMalle.R: compares item loadings of Dweck and Malle data qualitatively
 	comparingDweckMalleRaw.R: creates a csv of the distributions of data from different
 		combinations of characters and items
+	CFA.R: runs a confirmatory factor analysis on four Dweck dataframes
 
 		~compareDweckMalle/data/raw/
 		dweckRawData.csv: Dweck's raw data without identifying information
@@ -31,3 +32,4 @@ To run:
 	1. Export all directories in this repository to the same directory
 	2. Run any of the .R files in any order except must run 
 		DweckSimilartoMalleData.R before compareItemCharNums.R
+		and DweckSimilartoMalleData.R before CFA.R
