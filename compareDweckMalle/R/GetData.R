@@ -22,3 +22,9 @@ df_40_3 <- SafeReadCSV(dataFileName40_3)
 
 dataFileName40_21 <- paste0(dataDirectory, "items40chars21.csv")
 df_40_21 <- SafeReadCSV(dataFileName40_21)
+
+dataFileNamebody <- paste0(dataDirectory, "body.csv")
+df_body <- SafeReadCSV(dataFileNamebody)
+
+dataFileNamebodyAffect <- paste0(dataDirectory, "bodyAffect.csv")
+df_bodyAffect <- SafeReadCSV(dataFileNamebodyAffect)
