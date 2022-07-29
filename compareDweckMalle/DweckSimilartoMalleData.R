@@ -113,8 +113,50 @@ items40chars21 <- function(data){
   
    write.csv(byCharData,paste0(dataDirectory,"items40chars21.csv"))
 }
+body <- function(data){
+  characters <- c("stapler","car","computer",
+                  "robot","microbe","beetle",
+                  "fish","blue jay","frog",
+                  "mouse","goat","dog","bear",
+                  "dolphin","elephant","chimpanzee",
+                  "fetus","person in a persistant vegetative state",
+                  "infant","child","adult")
+  byCharData <- c()
+  for(index in 1:length(characters)){
+    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
+  }
+  #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
+  byCharData <- cbind(byCharData$hungry, byCharData$pain, byCharData$tired, byCharData$fear,
+                      byCharData$pleasure, byCharData$computations, byCharData$free_will,
+                      byCharData$conscious, byCharData$safe, byCharData$desires,
+                      byCharData$nauseated, byCharData$calm, byCharData$angry,
+                      byCharData$intentions, byCharData$self_aware)
+  
+  write.csv(byCharData,paste0(dataDirectory,"body.csv"))
+}
+bodyAffect <- function(data){
+  characters <- c("stapler","car","computer",
+                  "robot","microbe","beetle",
+                  "fish","blue jay","frog",
+                  "mouse","goat","dog","bear",
+                  "dolphin","elephant","chimpanzee",
+                  "fetus","person in a persistant vegetative state",
+                  "infant","child","adult")
+  byCharData <- c()
+  for(index in 1:length(characters)){
+    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
+  }
+  #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
+  byCharData <- cbind(byCharData$hungry, byCharData$pain, byCharData$pleasure,
+                      byCharData$angry, byCharData$desires)
+  
+  write.csv(byCharData,paste0(dataDirectory,"bodyAffect.csv"))
+}
+
 d_dweck <- as.data.frame(df_dweck)
 items16chars3(d_dweck)
 items16chars21(d_dweck)
 items40chars3(d_dweck)
 items40chars21(d_dweck)
+body(d_dweck)
+bodyAffect(d_dweck)
