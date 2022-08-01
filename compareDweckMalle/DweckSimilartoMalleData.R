@@ -152,6 +152,45 @@ bodyAffect <- function(data){
   
   write.csv(byCharData,paste0(dataDirectory,"bodyAffect.csv"))
 }
+heart <- function(data){
+  characters <- c("stapler","car","computer",
+                  "robot","microbe","beetle",
+                  "fish","blue jay","frog",
+                  "mouse","goat","dog","bear",
+                  "dolphin","elephant","chimpanzee",
+                  "fetus","person in a persistant vegetative state",
+                  "infant","child","adult")
+  byCharData <- c()
+  for(index in 1:length(characters)){
+    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
+  }
+  #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
+  byCharData <- cbind(byCharData$embarrassed, byCharData$pride, byCharData$love,
+                      byCharData$guilt, byCharData$beliefs, byCharData$disrespected,
+                      byCharData$depressed, byCharData$emo_recog, byCharData$joy,
+                      byCharData$personality, byCharData$happy, byCharData$morality,
+                      byCharData$self_restraint, byCharData$thoughts)
+  
+  write.csv(byCharData,paste0(dataDirectory,"heart.csv"))
+}
+heartMoralMental <- function(data){
+  characters <- c("stapler","car","computer",
+                  "robot","microbe","beetle",
+                  "fish","blue jay","frog",
+                  "mouse","goat","dog","bear",
+                  "dolphin","elephant","chimpanzee",
+                  "fetus","person in a persistant vegetative state",
+                  "infant","child","adult")
+  byCharData <- c()
+  for(index in 1:length(characters)){
+    byCharData <- rbind(byCharData,data[data$condition==characters[index],])
+  }
+  #NEXT REARRANGE ITEMS TO SIMULATED DATA FORMAT
+  byCharData <- cbind(byCharData$beliefs,
+                      byCharData$emo_recog, byCharData$self_restraint)
+  
+  write.csv(byCharData,paste0(dataDirectory,"heartMoralMental.csv"))
+}
 
 d_dweck <- as.data.frame(df_dweck)
 items16chars3(d_dweck)
@@ -160,3 +199,5 @@ items40chars3(d_dweck)
 items40chars21(d_dweck)
 body(d_dweck)
 bodyAffect(d_dweck)
+heart(d_dweck)
+heartMoralMental(d_dweck)

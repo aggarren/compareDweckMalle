@@ -45,14 +45,24 @@ fourtyTwentyOne <- model_40_21$loadings
 write.csv(fourtyTwentyOne,paste0(processedDataDirectory,"fourtyTwentyOneLoadings.csv"))
 
 df_body <- df_body[,2:ncol(df_body)]
-model_body <- principal(df_body,nfactors=2,rotate="varimax")
+model_body <- principal(df_body,nfactors=3,rotate="varimax")
 body <- model_body$loadings
 write.csv(body,paste0(processedDataDirectory,"bodyLoadings.csv"))
 
 df_bodyAffect <- df_bodyAffect[,2:ncol(df_bodyAffect)]
-model_bodyAffect <- principal(df_bodyAffect,nfactors=2,rotate="varimax")
+model_bodyAffect <- principal(df_bodyAffect,nfactors=3,rotate="varimax")
 bodyAffect <- model_bodyAffect$loadings
 write.csv(bodyAffect,paste0(processedDataDirectory,"bodyAffectLoadings.csv"))
+
+df_heart <- df_heart[,2:ncol(df_heart)]
+model_heart <- principal(df_heart,nfactors=3,rotate="varimax")
+heart <- model_heart$loadings
+write.csv(heart,paste0(processedDataDirectory,"heartLoadings.csv"))
+
+df_heartMoralMental <- df_heartMoralMental[,2:ncol(df_heartMoralMental)]
+model_heartMoralMental <- principal(df_heartMoralMental,nfactors=1,rotate="varimax")
+heartMoralMental <- model_heartMoralMental$loadings
+write.csv(heartMoralMental,paste0(processedDataDirectory,"heartMoralMentalLoadings.csv"))
 
 sixteenDifference <- sixteenThree - sixteenTwentyOne
 fourtyDifference <- fourtyThree - fourtyTwentyOne
